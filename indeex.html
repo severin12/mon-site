@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feuille de Match - Connexion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="logo-container">
+            <div class="fff-logo">
+                <span>FGF</span>
+            </div>
+        </div>
+
+        <h2>BIENVENUE</h2>
+
+        <form id="login-form">
+            <div class="input-group">
+                <label for="username">Identifiant</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-right-to-bracket"></i> SE CONNECTER
+                </button>
+                <button type="button" id="show-signup" class="btn btn-secondary">
+                    <i class="fa-solid fa-circle-info"></i> CRÉE UN COMPTE
+                </button>
+            </div>
+        </form>
+
+        <form id="create-account-form" class="signup-panel hidden">
+            <h3>Création de compte</h3>
+
+            <div class="input-group">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" required>
+            </div>
+
+            <div class="input-group">
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" required>
+            </div>
+
+            <div class="input-group">
+                <label for="dob">Date de naissance</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+
+            <div class="input-group">
+                <label for="ville">Ville</label>
+                <input type="text" id="ville" name="ville" required>
+            </div>
+
+            <div class="input-group">
+                <label for="club-actuel">Club actuel</label>
+                <input type="text" id="club-actuel" name="club-actuel" required>
+            </div>
+
+            <div class="input-group">
+                <label for="club-vise">Club visé</label>
+                <input type="text" id="club-vise" name="club-vise" required>
+            </div>
+
+            <div class="input-group">
+                <label for="poste-formation">Poste de formation</label>
+                <input type="text" id="poste-formation" name="poste-formation" required>
+            </div>
+
+            <div class="input-group">
+                <label>Pieds fort</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="pieds-fort" value="Gauche" required> Gauche</label>
+                    <label><input type="radio" name="pieds-fort" value="Droit"> Droit</label>
+                    <label><input type="radio" name="pieds-fort" value="Ambidextre"> Ambidextre</label>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Pouvez-vous jouer d'autre poste ?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="autre-poste" value="oui"> Oui</label>
+                    <label><input type="radio" name="autre-poste" value="non" checked> Non</label>
+                </div>
+            </div>
+
+            <div id="poste-extra-section" class="hidden">
+                <div class="input-group">
+                    <label for="nombre-postes">Nombre de postes</label>
+                    <input type="number" id="nombre-postes" name="nombre-postes" min="1" placeholder="Ex: 2">
+                </div>
+                <div class="input-group">
+                    <label for="liste-postes">Postes</label>
+                    <textarea id="liste-postes" name="liste-postes" rows="3" placeholder="Listez les postes séparés par une virgule"></textarea>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="nom-manager">Nom du manager</label>
+                <input type="text" id="nom-manager" name="nom-manager">
+            </div>
+
+            <div class="input-group">
+                <label for="photo">Ajouter une photo</label>
+                <input type="file" id="photo" name="photo" accept="image/*">
+            </div>
+
+            <div class="button-group">
+                <button type="submit" id="save-account" class="btn btn-primary">ENREGISTRER</button>
+                <button type="button" id="hide-signup" class="btn btn-secondary">FERMER</button>
+            </div>
+        </form>
+
+        <div id="cv-summary" class="cv-summary hidden">
+            <h3>Résumé du profil</h3>
+            <div id="cv-content"></div>
+        </div>
+
+        <div class="version">v 5.4.15</div>
+        <script>
+            const showSignup = document.getElementById('show-signup');
+            const hideSignup = document.getElementById('hide-signup');
+            const signupPanel = document.getElementById('create-account-form');
+            const loginForm = document.getElementById('login-form');
+            const loginContainer = document.querySelector('.login-container');
+            const posteRadios = document.querySelectorAll('input[name="autre-poste"]');
+            const posteExtra = document.getElementById('poste-extra-section');
+            const createAccountForm = document.getElementById('create-account-form');
+            const cvSummary = document.getElementById('cv-summary');
+            const cvContent = document.getElementById('cv-content');
+            let clickCount = 0;
+
+            function getFormValue(formData, name) {
+                return formData.get(name) || 'Non renseigné';
+            }
+
+            function showSignupForm() {
+                document.body.classList.add('signup-open');
+                loginForm.classList.add('hidden');
+                signupPanel.classList.remove('hidden');
+                cvSummary.classList.add('hidden');
+                if (loginContainer) {
+                    loginContainer.scrollTop = 0;
+                }
+            }
+
+            function hideSignupForm() {
+                document.body.classList.remove('signup-open');
+                signupPanel.classList.add('hidden');
+                loginForm.classList.remove('hidden');
+            }
+
+            function handleAccountSave(event) {
+                event.preventDefault();
+                clickCount += 1;
+                console.log('ENREGISTRER clicked', clickCount);
+
+                if (!createAccountForm.checkValidity()) {
+                    createAccountForm.reportValidity();
+                    return;
+                }
+
+                const formData = new FormData(createAccountForm);
+                const data = {
+                    nom: getFormValue(formData, 'nom'),
+                    prenom: getFormValue(formData, 'prenom'),
+                    dob: getFormValue(formData, 'dob'),
+                    ville: getFormValue(formData, 'ville'),
+                    clubActuel: getFormValue(formData, 'club-actuel'),
+                    clubVise: getFormValue(formData, 'club-vise'),
+                    posteFormation: getFormValue(formData, 'poste-formation'),
+                    piedsFort: getFormValue(formData, 'pieds-fort'),
+                    autrePoste: getFormValue(formData, 'autre-poste'),
+                    nombrePostes: getFormValue(formData, 'nombre-postes'),
+                    listePostes: getFormValue(formData, 'liste-postes'),
+                    nomManager: getFormValue(formData, 'nom-manager'),
+                    photo: formData.get('photo'),
+                };
+
+                const resumeItems = [
+                    { label: 'Nom', value: data.nom },
+                    { label: 'Prénom', value: data.prenom },
+                    { label: 'Date de naissance', value: data.dob },
+                    { label: 'Ville', value: data.ville },
+                    { label: 'Club actuel', value: data.clubActuel },
+                    { label: 'Club visé', value: data.clubVise },
+                    { label: 'Poste de formation', value: data.posteFormation },
+                    { label: 'Pieds fort', value: data.piedsFort },
+                    { label: 'Peut jouer d’autre poste', value: data.autrePoste === 'oui' ? 'Oui' : 'Non' },
+                ];
+
+                if (data.autrePoste === 'oui') {
+                    resumeItems.push({ label: 'Nombre de postes', value: data.nombrePostes });
+                    resumeItems.push({ label: 'Postes', value: data.listePostes });
+                }
+
+                resumeItems.push({ label: 'Nom du manager', value: data.nomManager });
+
+                cvContent.innerHTML = `
+                    <div class="cv-card">
+                        <div class="cv-header">
+                            <div>
+                                <h4>${data.prenom} ${data.nom}</h4>
+                                <p class="cv-role">${data.posteFormation}</p>
+                                <p class="cv-location">${data.ville}</p>
+                            </div>
+                            <div class="cv-photo-slot"></div>
+                        </div>
+
+                        <div class="cv-section">
+                            <h5>Profil</h5>
+                            <p>Joueur passionné, actuellement au ${data.clubActuel}, avec pour objectif de rejoindre ${data.clubVise}.</p>
+                        </div>
+
+                        <div class="cv-section">
+                            <h5>Informations principales</h5>
+                            <div class="cv-grid">
+                                ${resumeItems.map(item => `
+                                    <div class="cv-item">
+                                        <strong>${item.label}</strong>
+                                        <span>${item.value}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                if (data.photo && data.photo.size) {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        const img = document.createElement('img');
+                        img.src = reader.result;
+                        img.alt = 'Photo de profil';
+                        img.className = 'cv-photo';
+                        const photoSlot = cvContent.querySelector('.cv-photo-slot');
+                        if (photoSlot) {
+                            photoSlot.appendChild(img);
+                        }
+                    };
+                    reader.readAsDataURL(data.photo);
+                }
+
+                document.body.classList.remove('signup-open');
+                cvSummary.classList.remove('hidden');
+                signupPanel.classList.add('hidden');
+                cvSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            if (showSignup) {
+                showSignup.addEventListener('click', showSignupForm);
+            }
+
+            if (hideSignup) {
+                hideSignup.addEventListener('click', hideSignupForm);
+            }
+
+            if (createAccountForm) {
+                createAccountForm.addEventListener('submit', handleAccountSave);
+            }
+
+            posteRadios.forEach((radio) => {
+                radio.addEventListener('change', () => {
+                    posteExtra.classList.toggle('hidden', radio.value !== 'oui');
+                });
+            });
+        </script>
+
+        
+    </div>
+
+</body>
+</html> 

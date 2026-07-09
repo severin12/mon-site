@@ -1,0 +1,390 @@
+:root {
+    /* variables */
+}
+
+/* Réinitialisation de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Fond de page avec l'image du terrain de foot */
+body {
+    background: url('images.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* La carte blanche centrale */
+.login-container {
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 30px 25px;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 400px;
+    max-height: calc(100vh - 40px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.16);
+    text-align: center;
+    position: relative;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(20px);
+}
+
+.login-container::before,
+.login-container::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    filter: blur(16px);
+    opacity: 0.65;
+}
+
+.login-container::before {
+    width: 140px;
+    height: 140px;
+    top: -45px;
+    right: -45px;
+}
+
+.login-container::after {
+    width: 100px;
+    height: 100px;
+    bottom: -35px;
+    left: -35px;
+}
+
+/* Simulation du logo de la fédération */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.fff-logo {
+    background-color: #002d62;
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+    position: relative;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); /* Forme de blason */
+}
+
+/* Titre principal */
+h2 {
+    color: #111;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+/* Champs de saisie */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 15px;
+    color: #111;
+    margin-bottom: 8px;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+    border-color: #0056b3;
+}
+
+/* Zone des boutons */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.btn {
+    flex: 1;
+    padding: 10px 5px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+.btn-primary {
+    background-color: #0056b3;
+}
+
+.btn-primary:hover {
+    background-color: #004085;
+}
+
+.btn-secondary {
+    background-color: #17a2b8;
+}
+
+.btn-secondary:hover {
+    background-color: #117a8b;
+}
+
+/* Numéro de version */
+.version {
+    font-size: 11px;
+    color: #888;
+    text-align: right;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/* Lien d'aide en bas */
+.footer-link {
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    text-align: left;
+}
+
+.footer-link a {
+    color: #0056b3;
+    text-decoration: none;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.footer-link a:hover {
+    text-decoration: underline;
+}
+
+.signup-panel {
+    margin-top: 20px;
+    text-align: left;
+    display: block;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.96);
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.signup-panel h3 {
+    font-size: 20px;
+    color: #111;
+    margin-bottom: 18px;
+}
+
+.input-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 70px;
+    outline: none;
+    transition: border-color 0.2s;
+    background-color: #fff;
+    color: #111;
+}
+
+.input-group input,
+.input-group textarea {
+    background-color: #fff;
+    color: #111;
+}
+
+.input-group label {
+    color: #111;
+}
+
+.input-group textarea:focus {
+    border-color: #0056b3;
+}
+
+.radio-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.radio-group label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #111;
+}
+
+.hidden {
+  display: none;
+}
+
+body.signup-open #login-form {
+  display: none !important;
+}
+
+body.signup-open #create-account-form {
+  display: block !important;
+}
+
+body.signup-open #cv-summary {
+  display: none;
+}
+
+.helper {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.cv-summary {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 16px;
+    background-color: rgba(255,255,255,0.92);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+    text-align: left;
+}
+
+.cv-summary h3 {
+    margin-bottom: 16px;
+    color: #111;
+    font-size: 20px;
+}
+
+.cv-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cv-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.cv-header h4 {
+    color: #002d62;
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.cv-role {
+    font-weight: 700;
+    color: #0056b3;
+    margin-bottom: 4px;
+}
+
+.cv-location {
+    color: #666;
+    font-size: 14px;
+}
+
+.cv-photo-slot {
+    min-width: 90px;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cv-photo {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.cv-section {
+    background: #f7f9fc;
+    border-radius: 12px;
+    padding: 12px 14px;
+}
+
+.cv-section h5 {
+    margin-bottom: 8px;
+    color: #111;
+    font-size: 15px;
+}
+
+.cv-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.cv-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.cv-item strong {
+    color: #333;
+    font-size: 13px;
+}
+
+.cv-item span {
+    color: #555;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .cv-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cv-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 800px) {
+  .auth-card {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-intro {
+    padding-bottom: 20px;
+  }
+}
